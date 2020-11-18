@@ -1,9 +1,11 @@
 # Create a vpc
 resource "aws_vpc" "aws_vpc" {
   // Range of IPv4 addresses for the VPC in the form of a Classless Inter-Domain Routing (CIDR) block
-  // In this case, it means that your VPC will have 2 ^ 16 (65536) IPs addresses
-  // 10.0.0.0 = 00001010.00000000.00000000.00000000
+  // Submask separates network bits and host bits
+  // 10.0.0.0/16 = 00001010.00000000.00000000.00000000/16
   // 16 bits for the network address and 16 bits for hosts addresses
+  // Max number of IPS is 65536 and min is 16
+  // In this case, it means that your VPC will have 2 ^ 16 (65536) IPs addresses
   cidr_block = "10.0.0.0/16"
 
   tags = {
@@ -40,7 +42,7 @@ resource "aws_subnet" "public_subnet" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name        = "${var.environment}-public-subnet}"
+    Name        = "${var.environment}-public-subnet"
     Environment = "${var.environment}"
   }
 }
