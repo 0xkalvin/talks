@@ -1,3 +1,6 @@
 *.terraform
 plan.apply
 *.tfstate*
+
+*node_modules*
+*wallet*
